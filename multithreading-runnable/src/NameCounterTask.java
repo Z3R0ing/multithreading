@@ -3,13 +3,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class NameCounter implements Runnable {
+public class NameCounterTask implements Runnable {
 
     private final File[] files;
     private final String name;
     private final long startTime;
 
-    public NameCounter(File[] files, String name, long startTime) {
+    public NameCounterTask(File[] files, String name, long startTime) {
         this.files = files;
         this.name = name;
         this.startTime = startTime;

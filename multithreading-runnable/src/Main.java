@@ -14,8 +14,8 @@ public class Main {
         }
 
         // Firstly, run it for all files in this thread
-        NameCounter allFilesNameCounter = new NameCounter(files, "Alexander", System.currentTimeMillis());
-        allFilesNameCounter.run();
+        NameCounterTask allFilesNameCounterTask = new NameCounterTask(files, "Alexander", System.currentTimeMillis());
+        allFilesNameCounterTask.run();
 
         // Now create two Runnable and run it in different Threads
         // Split array
@@ -25,10 +25,10 @@ public class Main {
         System.arraycopy(files, 0, firstHalf, 0, firstHalf.length);
         System.arraycopy(files, middle, secondHalf, 0, secondHalf.length);
         // Create Runnable
-        NameCounter firstHalfNameCounter = new NameCounter(firstHalf, "Alexander", System.currentTimeMillis());
-        NameCounter secondHalfNameCounter = new NameCounter(secondHalf, "Alexander", System.currentTimeMillis());
+        NameCounterTask firstHalfNameCounterTask = new NameCounterTask(firstHalf, "Alexander", System.currentTimeMillis());
+        NameCounterTask secondHalfNameCounterTask = new NameCounterTask(secondHalf, "Alexander", System.currentTimeMillis());
         // Start in new Thread
-        new Thread(firstHalfNameCounter, "firstHalf").start();
-        new Thread(secondHalfNameCounter, "secondHalf").start();
+        new Thread(firstHalfNameCounterTask, "firstHalf").start();
+        new Thread(secondHalfNameCounterTask, "secondHalf").start();
     }
 }
