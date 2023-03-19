@@ -3,8 +3,6 @@ import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        System.out.println("Hello world!");
-
         // Find all TXT files in parent directory
         String srcDirStr = "../";
         File srcDir = new File(srcDirStr);
@@ -13,6 +11,7 @@ public class Main {
             throw new FileNotFoundException("No TXT files in " + srcDirStr);
         }
 
+        // ---------- RUNNABLE ----------
         // Firstly, run it for all files in this thread
         NameCounterTask allFilesNameCounterTask = new NameCounterTask(files, "Alexander");
         allFilesNameCounterTask.run();
@@ -30,5 +29,13 @@ public class Main {
         // Start in new Thread
         new Thread(firstHalfNameCounterTask, "firstHalf").start();
         new Thread(secondHalfNameCounterTask, "secondHalf").start();
+        // -------- END RUNNABLE --------
+
+        // ----- ATOMIC VARIABLES -----
+        NameCounter nameCounter = new NameCounter("Alexander");
+        for (File file : files) {
+            new Thread(() -> nameCounter.countInFile(file)).start();
+        }
+        // --- END ATOMIC VARIABLES ---
     }
 }
