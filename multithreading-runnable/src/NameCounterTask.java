@@ -7,16 +7,15 @@ public class NameCounterTask implements Runnable {
 
     private final File[] files;
     private final String name;
-    private final long startTime;
 
-    public NameCounterTask(File[] files, String name, long startTime) {
+    public NameCounterTask(File[] files, String name) {
         this.files = files;
         this.name = name;
-        this.startTime = startTime;
     }
 
     @Override
     public void run() {
+        long startTime = System.currentTimeMillis();
         int counter = 0;
         for (File file : files) {
             if (file == null) continue;
